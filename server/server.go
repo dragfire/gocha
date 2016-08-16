@@ -101,19 +101,3 @@ func MakeHandler(fn func(http.ResponseWriter, *http.Request, string)) http.Handl
 		fn(w, r, m[2])
 	}
 }
-
-//func main() {
-////p1 := &Page{Title: "TestPage", Body: []byte("This is a page sample.")}
-////p1.save()
-////p2, _ := loadPage("TestPage")
-////fmt.Println(string(p2.Body))
-
-//http.HandleFunc("/", handler)
-//http.HandleFunc("/view/", makeHandler(viewHandler))
-//http.HandleFunc("/edit/", makeHandler(editHandler))
-//http.HandleFunc("/save/", makeHandler(saveHandler))
-//fmt.Println("Server Listening: 8080")
-////chttp.Handle("/", http.FileServer(http.Dir("./public/")))
-//http.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
-//log.Fatal(http.ListenAndServe(":8080", nil))
-//}

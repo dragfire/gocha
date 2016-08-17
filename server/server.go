@@ -3,6 +3,7 @@ package server
 import (
 	"errors"
 	"fmt"
+	"github.com/dragfire/gocha/logger"
 	"html/template"
 	"io/ioutil"
 	"net/http"
@@ -12,6 +13,7 @@ import (
 var templates = template.Must(template.ParseFiles("views/edit.html", "views/save.html", "views/view.html"))
 var validPath = regexp.MustCompile("^/(edit|save|view)/([a-zA-Z0-9]+)$")
 
+// Export Page
 type Page struct {
 	Title string
 	Body  []byte
@@ -43,7 +45,7 @@ func ViewHandler(w http.ResponseWriter, r *http.Request, title string) {
 func EditHandler(w http.ResponseWriter, r *http.Request, title string) {
 	p, err := loadPage(title)
 	if err != nil {
-		fmt.Errorf("Error occurred")
+		logger.Error.Println("Error occurred")
 		p = &Page{Title: title}
 	}
 	renderTemplate(w, "edit", p)
@@ -85,6 +87,21 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	t, err := template.ParseFiles("views/index.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	t.Execute(w, nil)
+}
+
+func ClientHandler(w http.ResponseWriter, r *http.Request) {
+	root := regexp.MustCompile("^/chat$")
+	m := root.FindStringSubmatch(r.URL.Path)
+	fmt.Println("MatchFound:", m)
+	if m == nil {
+		http.NotFound(w, r)
+		return
+	}
+	t, err := template.ParseFiles("views/client.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

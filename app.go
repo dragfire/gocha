@@ -1,18 +1,27 @@
 package main
 
 import (
-	"fmt"
+	_ "fmt"
+	"github.com/dragfire/gocha/logger"
+	"github.com/dragfire/gocha/middlewares"
 	"github.com/dragfire/gocha/server"
-	"log"
 	"net/http"
 )
 
 func main() {
-	http.HandleFunc("/", server.Handler)
-	http.HandleFunc("/view/", server.MakeHandler(server.ViewHandler))
-	http.HandleFunc("/edit/", server.MakeHandler(server.EditHandler))
-	http.HandleFunc("/save/", server.MakeHandler(server.SaveHandler))
-	fmt.Println("Server Listening: 8080")
+	//http.Handle("/", middleware.LogRequest(
+	//http.HandlerFunc(
+	//func(w http.ResponseWriter, r *http.Request) {
+	//logger.Info.Println("Logging Done.")
+	//})))
+	//http.Handle("/", middleware.LogRequest(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	//w.Write([]byte("OK!"))
+	//})))
+	http.Handle("/", middleware.LogRequest(http.HandlerFunc(server.Handler)))
+	http.Handle("/view/", middleware.LogRequest(server.MakeHandler(server.ViewHandler)))
+	http.Handle("/edit/", middleware.LogRequest(server.MakeHandler(server.EditHandler)))
+	http.Handle("/save/", middleware.LogRequest(server.MakeHandler(server.SaveHandler)))
+	logger.Info.Println("Server Listening: 8080")
 	http.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	logger.Debug.Println(http.ListenAndServe(":8080", nil))
 }

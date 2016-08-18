@@ -3,11 +3,12 @@ package server
 import (
 	"errors"
 	"fmt"
-	"github.com/dragfire/gocha/logger"
 	"html/template"
 	"io/ioutil"
 	"net/http"
 	"regexp"
+
+	"github.com/dragfire/gocha/logger"
 )
 
 var templates = template.Must(template.ParseFiles("views/edit.html", "views/save.html", "views/view.html"))

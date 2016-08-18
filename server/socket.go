@@ -3,6 +3,7 @@ package server
 import (
 	"github.com/dragfire/gocha/logger"
 	"golang.org/x/net/websocket"
+	_ "time"
 )
 
 func SocketHandler(ws *websocket.Conn) {
@@ -19,7 +20,6 @@ func SocketHandler(ws *websocket.Conn) {
 		logger.Info.Println("Client: " + reply)
 		msg := "Received: " + reply
 		//logger.Info.Println("Sending: " + msg)
-
 		if err := websocket.Message.Send(ws, msg); err != nil {
 			logger.Error.Println("Can't send.", err)
 			break

@@ -1,11 +1,11 @@
-package layout
+package home
 
 import (
 	"fmt"
 	"github.com/jroimartin/gocui"
 )
 
-func Init(g *gocui.Gui) error {
+func Layout(g *gocui.Gui) error {
 	maxX, maxY := g.Size()
 
 	if v, err := g.SetView("title", maxX/2-7, 0, maxX/2+7, 3); err != nil {

@@ -1,6 +1,7 @@
-package layout
+package layouts
 
 import (
+	"github.com/dragfire/gocha/layouts/home"
 	"github.com/jroimartin/gocui"
 	"log"
 )
@@ -15,7 +16,7 @@ func Main() {
 	defer app.Close()
 
 	app.Cursor = true
-	app.SetLayout(Init)
+	app.SetLayout(home.Layout)
 
 	if err := keybindings(app); err != nil {
 		log.Panicln(err)

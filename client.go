@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/dragfire/gocha/layout"
+	"github.com/dragfire/gocha/layouts"
 )
 
 func main() {
-	layout.Main()
+	layouts.Main()
 }

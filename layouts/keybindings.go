@@ -10,7 +10,7 @@ func keybindings(g *gocui.Gui) error {
 		return err
 	}
 
-	if err := g.SetKeybinding("", gocui.KeyPgdn, gocui.ModNone, chat.Init); err != nil {
+	if err := g.SetKeybinding("", gocui.KeyPgdn, gocui.ModNone, chat.Handler); err != nil {
 		return err
 	}
 
@@ -19,6 +19,10 @@ func keybindings(g *gocui.Gui) error {
 	}
 
 	if err := g.SetKeybinding("msg", gocui.KeyCtrlC, gocui.ModNone, Quit); err != nil {
+		return err
+	}
+
+	if err := g.SetKeybinding("input", gocui.KeyEnter, gocui.ModNone, chat.FromView); err != nil {
 		return err
 	}
 

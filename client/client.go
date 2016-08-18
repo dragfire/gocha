@@ -3,9 +3,11 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"os"
+	"time"
+
 	"github.com/dragfire/gocha/logger"
 	"golang.org/x/net/websocket"
-	"os"
 )
 
 var (
@@ -25,6 +27,7 @@ func receiver(ws *websocket.Conn) {
 func sender(ws *websocket.Conn) {
 	var message string
 	for {
+		time.Sleep(200 * time.Millisecond)
 		fmt.Print("Message: ")
 		message, _ = in.ReadString('\n')
 		websocket.Message.Send(ws, message)

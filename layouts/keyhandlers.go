@@ -2,7 +2,18 @@ package layouts
 
 import (
 	"fmt"
+	"github.com/dragfire/gocha/layouts/chat"
 	"github.com/jroimartin/gocui"
+	"strings"
+)
+
+const (
+	NEW_CHANNEL          = "/create:"
+	JOIN_CHANNEL         = "/join:"
+	LEAVE_CHANNEL        = "/leave:"
+	NEW_PRIVATE_CHANNEL  = "/private:create:"
+	JOIN_PRIVATE_CHANNEL = "/private:join:"
+	START                = "/start" // choose a default channel
 )
 
 func GetCmd(g *gocui.Gui, v *gocui.View) error {
@@ -22,6 +33,14 @@ func GetCmd(g *gocui.Gui, v *gocui.View) error {
 		if err := g.SetCurrentView("msg"); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func processCmd(g *gocui.Gui, v *gocui.View) error {
+	cmd := v.ViewBuffer()
+	if strings.Contains(cmd, START) {
+		g.SetLayout(chat.Layout)
 	}
 	return nil
 }

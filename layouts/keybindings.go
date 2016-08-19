@@ -14,7 +14,14 @@ func keybindings(g *gocui.Gui) error {
 		return err
 	}
 
-	if err := g.SetKeybinding("cmdbar", gocui.KeyEnter, gocui.ModNone, GetCmd); err != nil {
+	//if err := g.SetKeybinding("cmdbar", gocui.KeyEnter, gocui.ModNone, func(g *gocui.Gui, v *gocui.View) error {
+	//g.SetLayout(chat.Layout)
+	//return nil
+	//}); err != nil {
+	//return err
+	//}
+
+	if err := g.SetKeybinding("cmdbar", gocui.KeyEnter, gocui.ModNone, processCmd); err != nil {
 		return err
 	}
 

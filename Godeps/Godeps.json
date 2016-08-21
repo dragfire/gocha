@@ -1,0 +1,25 @@
+{
+	"ImportPath": "github.com/dragfire/gocha",
+	"GoVersion": "go1.6",
+	"GodepVersion": "v74",
+	"Deps": [
+		{
+			"ImportPath": "github.com/jroimartin/gocui",
+			"Comment": "v0.2.0-21-gaa556cf",
+			"Rev": "aa556cf13539b3ccee4af63bf73daca9dc43b216"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-runewidth",
+			"Comment": "v0.0.1",
+			"Rev": "d6bea18f789704b5f83375793155289da36a3c7f"
+		},
+		{
+			"ImportPath": "github.com/nsf/termbox-go",
+			"Rev": "e8f6d27f72a2f2bb598eb3579afd5ea364ef67f7"
+		},
+		{
+			"ImportPath": "golang.org/x/net/websocket",
+			"Rev": "07b51741c1d6423d4a6abab1c49940ec09cb1aaf"
+		}
+	]
+}

@@ -11,6 +11,7 @@ func Layout(g *gocui.Gui) error {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
+		v.Autoscroll = true
 		v.Title = "Gocha"
 	}
 

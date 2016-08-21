@@ -1,4 +1,4 @@
-package main
+package client
 
 import (
 	"bufio"
@@ -34,7 +34,7 @@ func sender(ws *websocket.Conn) {
 	}
 }
 
-func connect() {
+func Connect() {
 	ws, err := websocket.Dial(url, "", origin)
 	ch := make(chan int)
 	if err != nil {
@@ -62,9 +62,4 @@ func connect() {
 	// }
 	//
 	// logger.Info.Println("Received: " + string(msg[:n]))
-}
-
-func main() {
-	logger.Info.Println("******Starting Chat Client******")
-	connect()
 }

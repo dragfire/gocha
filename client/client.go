@@ -4,6 +4,6 @@ import (
 	"github.com/dragfire/gocha/layouts"
 )
 
-func main() {
+func Init() {
 	layouts.Main()
 }

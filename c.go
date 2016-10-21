@@ -1,10 +1,15 @@
 package main 
 
 import (
-    _ "github.com/dragfire/gocha/client"
+    "github.com/dragfire/gocha/client"
     "github.com/dragfire/gocha/server"
+    "fmt"
 )
 
 func main(){
-    server.Main()
+    go func () {
+        fmt.Println("Starting server")
+        server.Main()
+    }()
+    defer client.Init()
 }

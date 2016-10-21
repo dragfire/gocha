@@ -6,7 +6,6 @@ import (
 	"github.com/dragfire/gocha/socket"
 	"github.com/jroimartin/gocui"
 	"golang.org/x/net/websocket"
-	_ "log"
 	"strings"
 )
 
@@ -20,11 +19,11 @@ const (
 )
 
 func GetCmd(g *gocui.Gui, v *gocui.View) error {
-	var (
-		cmd string
-	)
+	var cmd string
 
 	cmd = v.ViewBuffer()
+
+	fmt.Println("Get CMD")
 
 	maxX, maxY := g.Size()
 
@@ -45,6 +44,9 @@ func processCmd(g *gocui.Gui, v *gocui.View) error {
 	if strings.Contains(cmd, START) {
 		g.SetLayout(chat.Layout)
 	}
+
+	fmt.Println("Process CMD")
+	
 	return nil
 }
 

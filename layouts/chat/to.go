@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func toView(g *gocui.Gui, vy int) error {
+func toView(g *gocui.Gui, msg string, vy int) error {
 	maxX, _ := g.Size()
 
 	tname := "to" + strconv.Itoa(vy)
@@ -15,13 +15,14 @@ func toView(g *gocui.Gui, vy int) error {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
-		fmt.Fprintf(v, "\x1b[0;36mHow are you?")
+		v.FgColor = gocui.ColorMagenta
+		fmt.Fprintf(v, msg)
 	}
 	return nil
 }
 
-func ToView(g *gocui.Gui, v *gocui.View) error {
-	toView(g, y)
+func ToView(g *gocui.Gui, msg string, v *gocui.View) error {
+	toView(g, msg, y)
 	y += 3
 	return nil
 }

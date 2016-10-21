@@ -8,7 +8,7 @@ import (
 
 var y int = 0
 
-func fromView(g *gocui.Gui, vy int) error {
+func fromView(g *gocui.Gui, msg string, vy int) error {
 	maxX, _ := g.Size()
 
 	fname := "from" + strconv.Itoa(vy)
@@ -17,13 +17,14 @@ func fromView(g *gocui.Gui, vy int) error {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
-		fmt.Fprintf(v, "Hello \033[36;7mcolors!\033[0m\n")
+		v.FgColor = gocui.ColorCyan
+		fmt.Fprintf(v, msg)
 	}
 	return nil
 }
 
-func FromView(g *gocui.Gui, v *gocui.View) error {
-	fromView(g, y)
+func FromView(g *gocui.Gui, msg string, v *gocui.View) error {
+	fromView(g, msg, y)
 	y += 3
 	return nil
 }

@@ -54,13 +54,13 @@ func chatBoxHandlers(g *gocui.Gui, v *gocui.View) error {
 	text := v.ViewBuffer()
 	websocket.Message.Send(socket.Conn, &text)
 
-	//v.Clear()
-	////fmt.Printf(text, strings.Contains(text, "to:"))
-	//if strings.Contains(text, "to") {
-	//chat.ToView(g, v)
-	//} else {
-	//chat.FromView(g, v)
-	//}
+	v.Clear()
+	//fmt.Printf(text, strings.Contains(text, "to:"))
+	if strings.Contains(text, "to") {
+		chat.ToView(g, text, v)
+	} else {
+		chat.FromView(g, text, v)
+	}
 	return nil
 }
 

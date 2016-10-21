@@ -18,7 +18,7 @@ func fromView(g *gocui.Gui, msg string, vy int) error {
 			return err
 		}
 		v.FgColor = gocui.ColorCyan
-		fmt.Fprintf(v, msg)
+		fmt.Fprintf(v, "%s", msg)
 	}
 	return nil
 }

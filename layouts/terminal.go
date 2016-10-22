@@ -1,9 +1,10 @@
 package layouts
 
 import (
+	"log"
+
 	"github.com/dragfire/gocha/layouts/home"
 	"github.com/jroimartin/gocui"
-	"log"
 )
 
 func Main() {
@@ -16,6 +17,7 @@ func Main() {
 	defer app.Close()
 
 	app.Cursor = true
+	app.BgColor = gocui.ColorDefault
 	app.SetLayout(home.Layout)
 
 	if err := keybindings(app); err != nil {

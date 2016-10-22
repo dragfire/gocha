@@ -3,9 +3,11 @@ package layouts
 import (
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/dragfire/gocha/layouts/chat"
 	"github.com/dragfire/gocha/socket"
+	"github.com/fatih/color"
 	"github.com/jroimartin/gocui"
 	"golang.org/x/net/websocket"
 )
@@ -23,8 +25,6 @@ func GetCmd(g *gocui.Gui, v *gocui.View) error {
 	var cmd string
 
 	cmd = v.ViewBuffer()
-
-	//fmt.Println("Get CMD")
 
 	maxX, maxY := g.Size()
 
@@ -45,32 +45,24 @@ func processCmd(g *gocui.Gui, v *gocui.View) error {
 	if strings.Contains(cmd, start) {
 		g.SetLayout(chat.Layout)
 	}
-
-	//fmt.Println("Process CMD")
-
 	return nil
 }
 
 func chatBoxHandlers(g *gocui.Gui, v *gocui.View) error {
-	text := v.ViewBuffer()
+	text := strings.TrimSpace(v.ViewBuffer())
 	websocket.Message.Send(socket.Conn, &text)
 
 	v.Clear()
+	chatView, err := g.View("chat")
 
-	// Let's print it out in the console for debugging
-	if v, err := g.View("console"); err != nil {
-		if err != gocui.ErrUnknownView {
-			return err
-		}
-		fmt.Fprint(v, text)
+	if err != nil && err != gocui.ErrUnknownView {
+		return err
 	}
 
-	//fmt.Printf(text, strings.Contains(text, "to:"))
-	if strings.Contains(text, "to") {
-		chat.ToView(g, text, v)
-	} else {
-		chat.FromView(g, text, v)
-	}
+	TSColor := color.New(color.FgYellow).SprintFunc()
+
+	timestamp := time.Now().Format("03:04")
+	fmt.Fprintf(chatView, "-> [%s] * %s\n", TSColor(timestamp), color.CyanString(text))
 	return nil
 }
 

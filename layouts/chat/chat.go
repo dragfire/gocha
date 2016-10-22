@@ -7,12 +7,19 @@ import (
 func Layout(g *gocui.Gui) error {
 	maxX, maxY := g.Size()
 
-	if v, err := g.SetView("as", 1, 1, maxX-1, maxY-4); err != nil {
+	if v, err := g.SetView("as", 1, 1, maxX-1, maxY-8); err != nil {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
 		v.Autoscroll = true
 		v.Title = "Gocha"
+	}
+
+	if v, err := g.SetView("console", 1, maxY-8, maxX-1, maxY-4); err != nil {
+		if err != gocui.ErrUnknownView {
+			return err
+		}
+		v.Title = "Console"
 	}
 
 	if v, err := g.SetView("input", 1, maxY-3, maxX-1, maxY-1); err != nil {

@@ -56,6 +56,15 @@ func chatBoxHandlers(g *gocui.Gui, v *gocui.View) error {
 	websocket.Message.Send(socket.Conn, &text)
 
 	v.Clear()
+
+	// Let's print it out in the console for debugging
+	if v, err := g.View("console"); err != nil {
+		if err != gocui.ErrUnknownView {
+			return err
+		}
+		fmt.Fprint(v, text)
+	}
+
 	//fmt.Printf(text, strings.Contains(text, "to:"))
 	if strings.Contains(text, "to") {
 		chat.ToView(g, text, v)

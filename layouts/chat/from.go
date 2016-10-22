@@ -7,7 +7,7 @@ import (
 	"github.com/jroimartin/gocui"
 )
 
-var y int = 0
+var y int
 
 func fromView(g *gocui.Gui, msg string, vy int) error {
 	maxX, _ := g.Size()

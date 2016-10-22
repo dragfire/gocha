@@ -1,54 +1,55 @@
-package main 
+package main
 
 import (
-    "github.com/dragfire/gocha/client"
-    "github.com/dragfire/gocha/server"
-    "fmt"
-    "os"
-    "errors"
+	"errors"
+	"fmt"
+	"os"
+
+	"github.com/dragfire/gocha/client"
+	"github.com/dragfire/gocha/server"
 )
 
 var (
-    ErrorNotEnoughArguments = errors.New("Supply a mode.")
-    CLIENT = "client"
-    SERVER ="server"
+	errorNotEnoughArguments = errors.New("Supply a mode.")
+	clientMode              = "client"
+	serverMode              = "server"
 )
 
 func getMode() (string, error) {
-    mode := os.Args
-    n := len(mode)
+	mode := os.Args
+	n := len(mode)
 
-    if n>1 && (mode[1] == SERVER || mode[1] == CLIENT)  {
-        return mode[1], nil
-    }
+	if n > 1 && (mode[1] == serverMode || mode[1] == clientMode) {
+		return mode[1], nil
+	}
 
-    return "", ErrorNotEnoughArguments
+	return "", errorNotEnoughArguments
 }
 
-func main(){
+func main() {
 
-    // go run c.go client/backend 
+	// go run c.go client/backend
 
-    mode, err := getMode()
-    
-    //fmt.Println("Mode:", mode, err)
-    
-    if err == nil {
-        fmt.Println("Mode:", mode)
-    } else {
-        // create a panic in case mode is not provided
-        panic(err)   
-    }
+	mode, err := getMode()
 
-    if mode == CLIENT {
-        client.Init()
-    } else {
-        server.Main()
-    }
+	//fmt.Println("Mode:", mode, err)
 
-    // go func () {
-    //     fmt.Println("Starting server")
-    //     server.Main()
-    // }()
-    // defer client.Init()
+	if err != nil {
+		// create a panic in case mode is not provided
+		panic(err)
+	}
+
+	fmt.Println("Mode:", mode)
+
+	if mode == clientMode {
+		client.Init()
+	} else {
+		server.Main()
+	}
+
+	// go func () {
+	//     fmt.Println("Starting server")
+	//     server.Main()
+	// }()
+	// defer client.Init()
 }

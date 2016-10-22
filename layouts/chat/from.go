@@ -2,8 +2,9 @@ package chat
 
 import (
 	"fmt"
-	"github.com/jroimartin/gocui"
 	"strconv"
+
+	"github.com/jroimartin/gocui"
 )
 
 var y int = 0
@@ -12,14 +13,15 @@ func fromView(g *gocui.Gui, msg string, vy int) error {
 	maxX, _ := g.Size()
 
 	fname := "from" + strconv.Itoa(vy)
+	v, err := g.SetView(fname, 1, vy, maxX-40, vy+2)
 
-	if v, err := g.SetView(fname, 1, vy, maxX-40, vy+2); err != nil {
-		if err != gocui.ErrUnknownView {
-			return err
-		}
-		v.FgColor = gocui.ColorCyan
-		fmt.Fprintf(v, "%s", msg)
+	if err != nil && err != gocui.ErrUnknownView {
+		return err
 	}
+
+	v.FgColor = gocui.ColorCyan
+	fmt.Fprintf(v, "%s", msg)
+
 	return nil
 }
 

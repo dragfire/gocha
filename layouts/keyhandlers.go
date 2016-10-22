@@ -2,20 +2,21 @@ package layouts
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/dragfire/gocha/layouts/chat"
 	"github.com/dragfire/gocha/socket"
 	"github.com/jroimartin/gocui"
 	"golang.org/x/net/websocket"
-	"strings"
 )
 
 const (
-	NEW_CHANNEL          = "/create:"
-	JOIN_CHANNEL         = "/join:"
-	LEAVE_CHANNEL        = "/leave:"
-	NEW_PRIVATE_CHANNEL  = "/private:create:"
-	JOIN_PRIVATE_CHANNEL = "/private:join:"
-	START                = "/start" // choose a default channel
+	newChannel         = "/create:"
+	joinChannel        = "/join:"
+	leaveChannel       = "/leave:"
+	newPrivateChannel  = "/private:create:"
+	joinPrivateChannel = "/private:join:"
+	start              = "/start" // choose a default channel
 )
 
 func GetCmd(g *gocui.Gui, v *gocui.View) error {
@@ -23,7 +24,7 @@ func GetCmd(g *gocui.Gui, v *gocui.View) error {
 
 	cmd = v.ViewBuffer()
 
-	fmt.Println("Get CMD")
+	//fmt.Println("Get CMD")
 
 	maxX, maxY := g.Size()
 
@@ -41,12 +42,12 @@ func GetCmd(g *gocui.Gui, v *gocui.View) error {
 
 func processCmd(g *gocui.Gui, v *gocui.View) error {
 	cmd := v.ViewBuffer()
-	if strings.Contains(cmd, START) {
+	if strings.Contains(cmd, start) {
 		g.SetLayout(chat.Layout)
 	}
 
-	fmt.Println("Process CMD")
-	
+	//fmt.Println("Process CMD")
+
 	return nil
 }
 

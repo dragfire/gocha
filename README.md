@@ -1,7 +1,10 @@
-#gocha
+**gocha**
+
 Terminal Internet Relay Chat[IRC] using GO
 
-Screenshots:
-<img src="public/images/gocha.png" width="700" height="500"/>
-<br />
+Screenshot:
+<img src="public/images/gocha.png" width="800" height="500"/>
+
+
+
 *Work in progress.*
